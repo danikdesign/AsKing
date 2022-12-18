@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
       flash[:success] = "Answer created!"
       redirect_to question_path(@question)
     else
-      @answers = Answer.order created_at: :desc
+      @answers = @question.answers.order created_at: :desc
       render 'questions/show', status: :unprocessable_entity
     end
   end
@@ -35,6 +35,8 @@ class AnswersController < ApplicationController
 
     redirect_to question_path(@question)
   end
+
+
 
   private
   def set_question!
