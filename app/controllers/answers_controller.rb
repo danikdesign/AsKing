@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update answer_params
-      redirect_to question_path(@question)
+      redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
     else
       render :edit, status: :unprocessable_entity
     end
