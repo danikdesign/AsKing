@@ -32,11 +32,16 @@
     <small>No one has answered this question yet</small>
   </h2>
 <% end %>
-<div class="col mt-3">
-  <%= paginate @answers %>
-</div>
+
+<% if @answers.length > 19 %>
+  <div class="col mt-3">
+    <%== pagy_bootstrap_nav @pagy  %>
+  </div>
+<% end %>
 <%= render partial: 'answers/answer', collection: @answers,
            as: :answer, locals: { question: @question } %>
-<div class="col mt-3">
-  <%= paginate @answers %>
-</div>
+<% if @answers.length > 19 %>
+  <div class="col mt-3">
+    <%== pagy_bootstrap_nav @pagy  %>
+  </div>
+<% end %>

@@ -6,9 +6,11 @@
 <%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg' %>
 </div>
 
-<div class="col mt-3">
-  <%= paginate @questions  %>
-</div>
+<% if @questions.length > 19 %>
+  <div class="col mt-3">
+    <%== pagy_bootstrap_nav @pagy  %>
+  </div>
+<% end %>
 
 <% @questions.each do |question| %>
   <article class="card mt-3">
@@ -37,6 +39,8 @@
 
 <% end %>
 
-<div class="col mt-3">
-  <%= paginate @questions %>
-</div>
+<% if @questions.length > 19 %>
+  <div class="col mt-3">
+    <%== pagy_bootstrap_nav @pagy  %>
+  </div>
+<% end %>
