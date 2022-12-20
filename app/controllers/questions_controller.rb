@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new question_params
     if @question.save
+      flash[:success] = "Thank's for your question!"
       redirect_to questions_path
     else
       render :new, status: :unprocessable_entity
@@ -25,6 +26,7 @@ class QuestionsController < ApplicationController
   end
   def update
     if @question.update question_params
+      flash[:success] = "Your question has been updated"
       redirect_to question_path(@question)
     else
       render :edit, status: :unprocessable_entity
