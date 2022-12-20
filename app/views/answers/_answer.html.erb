@@ -1,4 +1,4 @@
-<article class="card mt-3" id="<%= answer.id %>">
+<%= tag.article class: 'card mt-3', id: dom_id(answer) do %>
   <div class="card-body">
     <section class="card-text">
       <div class="my-2">
@@ -19,4 +19,4 @@
                   }, value: "Destroy" %>
     </div>
   </div>
-</article>
+<% end %>

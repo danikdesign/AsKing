@@ -32,6 +32,11 @@
     <small>No one has answered this question yet</small>
   </h2>
 <% end %>
-
+<div class="col mt-3">
+  <%= paginate @answers %>
+</div>
 <%= render partial: 'answers/answer', collection: @answers,
            as: :answer, locals: { question: @question } %>
+<div class="col mt-3">
+  <%= paginate @answers %>
+</div>
