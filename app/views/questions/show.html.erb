@@ -33,15 +33,11 @@
   </h2>
 <% end %>
 
-<% if @answers.length > 19 %>
-  <div class="col mt-3">
-    <%== pagy_bootstrap_nav @pagy  %>
-  </div>
-<% end %>
+<div class="col mt-3">
+  <%== pagination @pagy %>
+</div>
 <%= render partial: 'answers/answer', collection: @answers,
            as: :answer, locals: { question: @question } %>
-<% if @answers.length > 19 %>
-  <div class="col mt-3">
-    <%== pagy_bootstrap_nav @pagy  %>
-  </div>
-<% end %>
+<div class="col mt-3">
+  <%== pagination @pagy %>
+</div>
