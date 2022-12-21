@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
   include ErrorHandling
-  include UserAuthorization
 
   private
   def current_user
