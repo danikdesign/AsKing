@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
   end
   def create
     @answer = @question.answers.create answer_params
+    @answer = @answer.decorate
 
     if @answer.save
       flash[:success] = "Answer created!"
@@ -43,10 +44,12 @@ class AnswersController < ApplicationController
   private
   def set_question!
     @question = Question.find params[:question_id]
+    @question = @question.decorate
   end
 
   def set_answer!
     @answer = @question.answers.find params[:id]
+    @answer = @answer.decorate
   end
   def answer_params
     params.require(:answer).permit(:body)

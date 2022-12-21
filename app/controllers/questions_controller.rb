@@ -49,5 +49,6 @@ class QuestionsController < ApplicationController
 
   def set_question!
     @question = Question.find params[:id]
+    @question = @question.decorate
   end
 end
