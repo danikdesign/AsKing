@@ -42,6 +42,6 @@
     </div>
   </div>
 
-  <%= f.submit "Sign Up", class: 'btn btn-primary btn-lg' %>
+  <%= f.submit (@user.new_record? ? "Sign Up" : "Save"), class: 'btn btn-primary btn-lg' %>
 
 <% end %>
