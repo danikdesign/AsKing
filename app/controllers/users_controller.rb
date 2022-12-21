@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       flash[:success] = "Your profile was successfully updated!"
       redirect_to edit_user_path(@user)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -35,6 +35,6 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
   end
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :old_password)
   end
 end
