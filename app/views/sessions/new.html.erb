@@ -1,7 +1,7 @@
 <% provide :page_title, 'Log In' %>
 <% currently_at 'Log In' %>
 
-<h1 class="mb-4">LogIn</h1>
+<h1 class="mb-4">Log In</h1>
 
 
 <%= form_with url: session_path do |f| %>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-sm-10">
-      <%= f.email_field :email, placeholder: 'Email', class: 'form-control form-control-lg' %>
+      <%= f.email_field :email, value: params[:email], placeholder: 'Email', class: 'form-control form-control-lg' %>
     </div>
   </div>
 
