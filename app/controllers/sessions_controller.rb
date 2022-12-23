@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:warning] = "Incorrect email and/or password!"
-      render :new
+      render :new, status: 422
     end
   end
 
