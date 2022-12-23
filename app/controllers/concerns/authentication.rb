@@ -6,17 +6,24 @@ module Authentication
 
     private
     def current_user
-      if session[:user_id].present?
-        @current_user ||= User.find_by(id: session[:user_id]).decorate
-      elsif cookies[:user_id].present?
-        user = User.find_by(id: session[:user_id]).decorate
-        if user&.remember_token_autheticated?(cookies.encrypted[:remember_token])
-          sign_in(user)
-          @current_user ||= user.decorate
-        end
-      end
+      user = session[:user_id].present? ? user_from_session : user_from_token
+
+      @current_user ||= user&.decorate
     end
 
+    def user_from_session
+      User.find_by(id: session[:user_id]).decorate
+    end
+
+    def user_from_token
+      user = User.find_by(id: session[:user_id]).decorate
+      token = cookies.encrypted[:remember_token]
+
+      return unless user&.remember_token_autheticated?(token)
+
+      sign_in(user)
+      user
+    end
 
     def user_signed_in?
       current_user.present?
@@ -56,12 +63,10 @@ module Authentication
       cookies.delete :user_id
       cookies.delete :remember_token
     end
-    
+
     helper_method :current_user
     helper_method :user_signed_in?
-
   end
-
 end
 
 
