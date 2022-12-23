@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def forget_me
-    update_column remember_token_digest, nil
+    update_column :remember_token_digest, nil
     self.remember_token = nil
   end
 

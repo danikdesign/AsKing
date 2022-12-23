@@ -53,10 +53,10 @@ module Authentication
 
     def forget(user)
       user.forget_me
-      cookies.delete[:user_id]
-      cookies.delete[:remember_token]
+      cookies.delete :user_id
+      cookies.delete :remember_token
     end
-
+    
     helper_method :current_user
     helper_method :user_signed_in?
 
