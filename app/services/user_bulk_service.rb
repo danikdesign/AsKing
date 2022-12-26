@@ -8,7 +8,8 @@ class UserBulkService < ApplicationService
   def call
     Zip::File.open(@archive) do |zip_file|
       zip_file.each do |entry|
-        User.import users_from(entry), ignore: true
+        u = users_from(entry)
+        binding.pry
       end
     end
   end
