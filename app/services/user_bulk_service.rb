@@ -6,5 +6,10 @@ class UserBulkService < ApplicationService
   end
 
   def call
+    Zip::File.open(@archive) do |zip_file|
+      zip_file.each do |entry|
+
+      end
+    end
   end
 end
