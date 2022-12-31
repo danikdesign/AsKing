@@ -1,14 +1,27 @@
 <%= tag.article class: 'card mt-3', id: dom_id(answer) do %>
-  <div class="card-body">
-    <section class="card-text">
-      <div class="my-2">
-        <%= sanitize answer.body %>
-      </div>
+  <div class="row g-0">
+    <div class="col-sm-auto text-sm-center align-self-center">
+        <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
+        <%= @question.user.name_or_email %>
+    </div>
 
-      <time datetime="<%= answer.formatted_created_at %>">
-        <small><%= answer.formatted_created_at %></small>
-      </time>
-    </section>
+    <div class="col-sm">
+      <div class="card-body">
+        <section class="card-text mb-3">
+          <div class="col-sm-9">
+            <div class="mt-2">
+              <%= sanitize answer.body %>
+            </div>
+
+            <time datetime="<%= answer.formatted_created_at %>">
+              <small><%= answer.formatted_created_at %></small>
+            </time>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <%= link_to 'Edit', edit_question_answer_path(question, answer), class: 'btn btn-outline-secondary btn-sm mt-2' %>
