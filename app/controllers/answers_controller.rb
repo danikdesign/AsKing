@@ -3,12 +3,8 @@ class AnswersController < ApplicationController
   before_action :set_question!
   before_action :set_answer!, only: %i[edit update destroy]
 
-  def new
-    @answer = @question.answers.create answer_params
-    @answer = @answer.decorate
-  end
   def create
-    @answer = @question.answers.create answer_params
+    @answer = @question.answers.create answer_create_params
     @answer = @answer.decorate
 
     if @answer.save
@@ -26,7 +22,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update answer_params
+    if @answer.update answer_update_params
       flash[:success] = "Your answer updated!"
       redirect_to question_path(@question, anchor: dom_id(@answer))
     else
@@ -54,7 +50,11 @@ class AnswersController < ApplicationController
     @answer = @question.answers.find params[:id]
     @answer = @answer.decorate
   end
-  def answer_params
+  def answer_create_params
+    params.require(:answer).permit(:body).merge(user: current_user)
+  end
+
+  def answer_update_params
     params.require(:answer).permit(:body)
   end
 end
