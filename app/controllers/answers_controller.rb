@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  include QuestionsAnswers
   include ActionView::RecordIdentifier
   before_action :set_question!
   before_action :set_answer!, only: %i[edit update destroy]
@@ -11,10 +12,7 @@ class AnswersController < ApplicationController
       flash[:success] = "Answer created!"
       redirect_to question_path(@question)
     else
-      @question = @question.decorate
-      @pagy, @answers = pagy @question.answers.order(created_at: :desc)
-      @answers = @answers.decorate
-      render 'questions/show', status: :unprocessable_entity
+      load_question_answers do_render: true
     end
   end
 
