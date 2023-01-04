@@ -9,7 +9,17 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = 'Comment created'
       redirect_to question_path(@question)
+    else
+      @comment = @comment.decorate
+      load_question_answers do_render: true
     end
+  end
+
+  def destroy
+    comment = @commentable.comments.find params[:id]
+    comment.destroy
+    flash[:success] = 'Comment deleted'
+    redirect_to question_path(@question)
   end
 
   private
