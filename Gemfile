@@ -49,6 +49,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "bootstrap"
 
+gem "sassc-rails"
+
 gem "pagy"
 
 gem "draper"
