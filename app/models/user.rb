@@ -17,6 +17,12 @@ class User < ApplicationRecord
 
   before_save :set_gravatar_hash, if: :email_changed?
 
+  def guest?
+    false
+  end
+  def author?(obj)
+    obj.user == self
+  end
   def remember_me
     self.remember_token = SecureRandom.urlsafe_base64
     update_column :remember_token_digest, digest(remember_token)
