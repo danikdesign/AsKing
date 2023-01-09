@@ -1,6 +1,18 @@
 <% provide :page_title, 'Questions' %>
 <% currently_at 'Questions' %>
 
+<section class="mb-5">
+  <h4>Search by tags:</h4>
+
+  <%= form_with url: questions_path, method: :get do |f| %>
+    <div class="mb-3">
+      <%= f.collection_select :tag_ids, @tags, :id, :title, {selected: params[:tag_ids]},
+                              multiple: true, data: {controller: 'slim'} %>
+    </div>
+    <%= f.submit 'Search', class: 'btn btn-outline-success' %>
+  <% end %>
+</section>
+
 <div class="col">
 <%= link_to 'Questions', questions_path, class: 'btn btn-outline-dark btn-lg' %>
 <%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg' %>
