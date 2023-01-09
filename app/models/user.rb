@@ -1,15 +1,15 @@
 class User < ApplicationRecord
   enum role: { basic: 0, moderator: 1, admin: 2 }, _suffix: :role
 
-  attr_accessor :old_password, :remember_token
+  attr_accessor :old_password, :remember_token, :admin_edit
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
 
   has_secure_password validations: false
   validate :password_presence
-  validate :correct_old_password, on: :update
-  validates :password, confirmation: true, allow_blank: true
+  validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
+  validates :password, confirmation: true, allow_blank: true, length: { minimum: 8, maximum: 70 }
   validate :password_complexity
 
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
