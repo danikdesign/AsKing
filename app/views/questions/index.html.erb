@@ -14,8 +14,11 @@
 </section>
 
 <div class="col">
-<%= link_to 'Questions', questions_path, class: 'btn btn-outline-dark btn-lg' %>
-<%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg' %>
+  <%= link_to 'Questions', questions_path, class: 'btn btn-outline-dark btn-lg' %>
+
+  <% if policy(:question).new? %>
+    <%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg' %>
+  <% end %>
 </div>
 
 <div class="col mt-3">
