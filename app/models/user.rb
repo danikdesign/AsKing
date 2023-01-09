@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validate :password_complexity
 
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
+  validates :role, presence: true
 
   before_save :set_gravatar_hash, if: :email_changed?
 
