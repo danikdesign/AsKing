@@ -3,6 +3,8 @@ class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :set_question!
   before_action :set_answer!, only: %i[edit update destroy]
+  before_action :authorize_answer!
+  after_action :verify_authorized
 
   def create
     @answer = @question.answers.create answer_create_params
@@ -54,6 +56,10 @@ class AnswersController < ApplicationController
 
   def answer_update_params
     params.require(:answer).permit(:body)
+  end
+
+  def authorize_answer!
+    authorize(@question || Question)
   end
 end
 
