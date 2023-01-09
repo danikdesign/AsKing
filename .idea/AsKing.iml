@@ -48,6 +48,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.15.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap (v5.2.3, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 3.1.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bullet (v7.0.7, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.3.26, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.38.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="caxlsx (v3.3.0, rbenv: 3.1.0) [gem]" level="application" />
@@ -76,7 +77,7 @@
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile2 (v2.8.1, rbenv: 3.1.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.16.3, rbenv: 3.1.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.17.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.6.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.3.4, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, rbenv: 3.1.0) [gem]" level="application" />
@@ -116,6 +117,7 @@
     <orderEntry type="library" scope="PROVIDED" name="timeout (v0.3.1, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="turbo-rails (v1.3.2, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.5, rbenv: 3.1.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="uniform_notifier (v1.16.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="valid_email2 (v4.0.4, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.0, rbenv: 3.1.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webdrivers (v5.2.0, rbenv: 3.1.0) [gem]" level="application" />

@@ -1,0 +1,8 @@
+{
+  "name": "AsKing",
+  "version": "1.0.0",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
+    "slim-select": "^2.3.3"
+  }
+}
