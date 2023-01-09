@@ -59,7 +59,7 @@ class AnswersController < ApplicationController
   end
 
   def authorize_answer!
-    authorize(@question || Question)
+    authorize(@answer || Answer)
   end
 end
 
