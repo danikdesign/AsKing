@@ -100,3 +100,5 @@ group :test do
   gem "webdrivers"
 end
 
+
+gem "sidekiq", "~> 7.0"
