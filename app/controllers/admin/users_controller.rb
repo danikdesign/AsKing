@@ -17,7 +17,7 @@ module Admin
 
     def create
       if params[:archive].present?
-        UserBulkService.call params[:archive]
+        UserBulkImportJob.perform_later
         flash[:success] = "Users imported!"
       end
 
