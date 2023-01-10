@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   end
 
   resource :session, only: %i[new create destroy]
+
+  resource :password_reset, only: %i[new create edit update]
+
   resources :users, only: %i[new create edit update]
 
   resources :questions, concerns: :commentable do
