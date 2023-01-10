@@ -17,7 +17,7 @@ module Admin
 
     def create
       if params[:archive].present?
-        UserBulkImportJob.perform_later
+        UserBulkImportJob.perform_later create_blob, current_user
         flash[:success] = "Users imported!"
       end
 
@@ -43,6 +43,14 @@ module Admin
     end
 
     private
+
+    def create_blob
+      file = File.open params[:archive]
+      result = ActiveStorage::Blob.create_and_upload! io: file,
+                                                      filename: params[:archive].original_filename
+      file.close
+      result.key
+    end
 
     def respond_with_zipped_users
       compressed_filestream = Zip::OutputStream.write_buffer do |zos|
