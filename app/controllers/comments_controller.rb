@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+ class CommentsController < ApplicationController
 
   include QuestionsAnswers
   before_action :set_commentable!
@@ -8,10 +8,18 @@ class CommentsController < ApplicationController
 
     @comment = @commentable.comments.build comment_params
     authorize @comment
+    @comment = @comment.decorate
 
     if @comment.save
-      flash[:success] = 'Comment created'
-      redirect_to question_path(@question)
+      respond_to do |format|
+        format.html do
+          flash[:success] = 'Com ment was created'
+          redirect_to question_path(@question)
+        end
+
+        format.turbo_stream { flash.now[:success] = 'Comment was created' }
+      end
+
     else
       @comment = @comment.decorate
       load_question_answers do_render: true
@@ -19,11 +27,19 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = @commentable.comments.find params[:id]
-    authorize comment
-    comment.destroy
-    flash[:success] = 'Comment deleted'
-    redirect_to question_path(@question)
+    @comment = @commentable.comments.find params[:id]
+    authorize @comment
+
+    @comment.destroy
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'Comment was deleted'
+        redirect_to question_path(@question)
+      end
+
+      format.turbo_stream { flash.now[:success] = 'Comment was deleted' }
+    end
+
   end
 
   private

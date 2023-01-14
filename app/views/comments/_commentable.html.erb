@@ -1,31 +1,36 @@
-<% is_current_comment = comment&.for?(commentable) %>
-<% comment_builder = is_current_comment ? comment: commentable.comments.build %>
+<% comment_builder = commentable.comments.build %>
+<% html_id = dom_id commentable, 'comments' %>
+
 <div class="mt-3">
 <%= link_to 'Comments', "##{html_id}",
     class: 'btn btn-outline-dark btn-sm', data: {'bs-toggle':'collapse'} %>
 </div>
-<%= tag.div class: "collapse #{'show' if is_current_comment}", id: html_id do %>
-  <% if policy(comment_builder).create? %>
-    <%= form_with model: [commentable, comment_builder],
-    class: 'pt-3 my-2' do |f| %>
-      <% if is_current_comment %>
-      <%= render 'shared/errors', object: @comment %>
-        <% end %>
+<%= tag.div class: "collapse", id: html_id do %>
+  <%= turbo_frame_tag "#{dom_id(commentable)}_#{dom_id(comment_builder)}" do %>
 
-      <div class="mb-3 row">
-        <div class="col-sm-2 col-form-label">
-          <%= f.label :body %>
+    <% if policy(comment_builder).create? %>
+      <%= form_with model: [commentable, comment_builder],
+      class: 'pt-3 my-2' do |f| %>
+        <%= render 'shared/errors', object: @comment %>
+
+        <div class="mb-3 row">
+          <div class="col-sm-2 col-form-label">
+            <%= f.label :body %>
+          </div>
+
+          <div class="col-sm-10">
+            <%= f.text_area :body, class: 'form-control form-control-sm' %>
+          </div>
         </div>
 
-        <div class="col-sm-10">
-          <%= f.text_area :body, class: 'form-control form-control-sm' %>
-        </div>
-      </div>
+        <%= f.submit "Submit", class: 'btn btn-sm btn-outline-primary' %>
 
-      <%= f.submit "Submit", class: 'btn btn-sm btn-outline-primary' %>
-
+      <% end %>
     <% end %>
-  <% end %>
 
-  <%= render commentable.comments.decorate %>
+    <%= turbo_frame_tag dom_id(commentable, 'comments_list') do %>
+      <%= render commentable.comments.decorate %>
+    <% end %>
+
+  <% end %>
 <% end %>

@@ -66,9 +66,7 @@ class QuestionsController < ApplicationController
         redirect_to questions_path, status: :see_other
       end
 
-      format.turbo_stream do
-        flash.now[:success] = "Your question was deleted"
-      end
+      format.turbo_stream { flash.now[:success] = "Your question was deleted" }
     end
   end
 

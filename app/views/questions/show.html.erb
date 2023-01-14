@@ -3,8 +3,7 @@
 
 <%= render @question %>
 
-<%= render 'comments/commentable', commentable: @question, comment: @comment,
-    html_id: 'questionComments'%>
+<%= render 'comments/commentable', commentable: @question, comment: @comment %>
 
 <hr class="my-3">
 
@@ -23,8 +22,13 @@
 <div class="col mt-3">
   <%== pagination @pagy %>
 </div>
-<%= render partial: 'answers/answer', collection: @answers,
-           as: :answer, locals: { question: @question } %>
+
+<%= turbo_frame_tag 'answers' do %>
+  <%= render partial: 'answers/answer', collection: @answers,
+             as: :answer, locals: { question: @question } %>
+<% end %>
+
 <div class="col mt-3">
   <%== pagination @pagy %>
 </div>
+
