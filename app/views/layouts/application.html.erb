@@ -16,7 +16,9 @@
 
     <%= yield :main_menu %>
 
-    <%= render 'shared/flashes' %>
+    <div id="flashes">
+      <%= render 'shared/flashes' %>
+    </div>
 
     <main class="container mt-3">
       <%= yield %>
