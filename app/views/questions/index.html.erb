@@ -30,7 +30,11 @@
   <%== pagination @pagy %>
 </div>
 
-<%= render partial: "question" %>
+<%= turbo_frame_tag 'questions' do %>
+
+    <%= render @questions %>
+
+<% end %>
 
 <div class="col mt-3">
   <%== pagination @pagy %>

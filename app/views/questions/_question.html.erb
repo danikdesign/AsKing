@@ -1,4 +1,4 @@
-<% @questions.each do |question| %>
+<%= turbo_frame_tag question do %>
   <article class="card mt-3">
 
     <section class="card-header">
@@ -39,5 +39,4 @@
       </section>
     </div>
   </article>
-
 <% end %>
