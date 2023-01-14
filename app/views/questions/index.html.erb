@@ -17,7 +17,12 @@
   <%= link_to 'Questions', questions_path, class: 'btn btn-outline-dark btn-lg' %>
 
   <% if policy(:question).new? %>
-    <%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg' %>
+    <%= link_to 'New question', new_question_path, class: 'btn btn-outline-dark btn-lg',
+                data: { turbo_frame: dom_id(Question.new) } %>
+
+    <div class="mb-3 mt-3">
+      <%= turbo_frame_tag Question.new %>
+    </div>
   <% end %>
 </div>
 
