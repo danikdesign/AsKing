@@ -7,7 +7,8 @@
     </section>
 
     <div class="card-body">
-      <h4><%= question.title %></h4>
+      <h4><%= link_to question.title, question_path(question),
+                      data: {turbo_frame: '_top'} %></h4>
 
       <section class="card-text">
         <time datetime="<%= question.formatted_created_at %>">
@@ -22,14 +23,12 @@
           <%= sanitize question.body %>
         </p>
 
-        <%= link_to 'Show', question_path(question), class: 'btn btn-primary' %>
-
         <% if policy(question).edit? %>
-          <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-secondary' %>
+          <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-outline-secondary' %>
         <% end %>
 
         <% if policy(question).destroy? %>
-          <%= link_to 'Destroy', question_path(question), class: 'btn btn-danger',
+          <%= link_to 'Delete', question_path(question), class: 'btn btn-outline-danger',
                       data: {
                         turbo_method: :delete,
                         turbo_confirm: "Are you sure?"
