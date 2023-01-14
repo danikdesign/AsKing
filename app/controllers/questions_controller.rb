@@ -62,6 +62,7 @@ class QuestionsController < ApplicationController
     @question.destroy
     respond_to do |format|
       format.html do
+        flash[:success] = "Your question was deleted"
         redirect_to questions_path, status: :see_other
       end
 
