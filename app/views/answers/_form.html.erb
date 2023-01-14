@@ -1,17 +1,18 @@
-<%= render 'shared/errors', object: @answer %>
+<%= turbo_frame_tag @answer do %>
+  <%= form_with model: [@question, @answer] do |f| %>
+    <%= render 'shared/errors', object: @answer %>
 
-<%= form_with model: [@question, @answer] do |f| %>
+    <div class="mb-3 row">
+      <div class="col-form-label fw-semibold fs-4">
+        <%= f.label 'Write your answer:' %>
+      </div>
 
-  <div class="mb-3 row">
-    <div class="col-form-label fw-semibold fs-4">
-      <%= f.label 'Write your answer:' %>
+      <div class="col-sm-12">
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
     </div>
 
-    <div class="col-sm-12">
-      <%= f.text_area :body, class: 'form-control' %>
-    </div>
-  </div>
+    <%= f.submit "Submit answer!", class: 'btn btn-outline-primary' %>
 
-  <%= f.submit "Submit answer!", class: 'btn btn-outline-primary' %>
-
+  <% end %>
 <% end %>

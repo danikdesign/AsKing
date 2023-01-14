@@ -1,43 +1,44 @@
-<%= tag.article class: 'card mt-3', id: dom_id(answer) do %>
-  <div class="row g-0">
-    <div class="col-sm-auto text-sm-center align-self-center m-3">
-      <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
-      <div class="col-sm-auto text-sm-center align-self-center m-2 ">
-      <strong><%= answer.user.name_or_email %></strong>
+<%= turbo_frame_tag answer do %>
+  <%= tag.article class: 'card mt-3' do %>
+    <div class="row g-0">
+      <div class="col-sm-auto text-sm-center align-self-center m-3">
+        <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
+        <div class="col-sm-auto text-sm-center align-self-center m-2 ">
+        <strong><%= answer.user.name_or_email %></strong>
+        </div>
       </div>
-    </div>
 
-    <div class="col-sm">
-      <div class="card-body">
-        <section class="card-text mb-3">
-          <div class="col-sm-9">
-            <div class="mt-2">
-              <%= sanitize answer.body %>
+      <div class="col-sm">
+        <div class="card-body">
+          <section class="card-text mb-3">
+            <div class="col-sm-9">
+              <div class="mt-2">
+                <%= sanitize answer.body %>
+              </div>
+
+              <time datetime="<%= answer.formatted_created_at %>">
+                <small><%= answer.formatted_created_at %></small>
+              </time>
+
             </div>
+          </section>
+          <%= render 'comments/commentable', commentable: answer, comment: @comment %>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <% if policy(answer).edit? %>
+              <%= link_to 'Edit', edit_question_answer_path(question, answer),
+                          class: 'btn btn-outline-secondary btn-sm mt-2' %>
+            <% end %>
 
-            <time datetime="<%= answer.formatted_created_at %>">
-              <small><%= answer.formatted_created_at %></small>
-            </time>
-
+            <% if policy(answer).destroy? %>
+              <%= link_to 'Destroy', question_answer_path(question, answer), class: 'btn btn-outline-danger btn-sm mt-2',
+                          data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          }, value: "Destroy" %>
+            <% end %>
           </div>
-        </section>
-        <%= render 'comments/commentable', commentable: answer, comment: @comment,
-                   html_id: dom_id(answer, 'comment_form') %>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <% if policy(answer).edit? %>
-            <%= link_to 'Edit', edit_question_answer_path(question, answer),
-                        class: 'btn btn-outline-secondary btn-sm mt-2' %>
-          <% end %>
-
-          <% if policy(answer).destroy? %>
-            <%= link_to 'Destroy', question_answer_path(question, answer), class: 'btn btn-outline-danger btn-sm mt-2',
-                        data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "Are you sure?"
-                        }, value: "Destroy" %>
-          <% end %>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

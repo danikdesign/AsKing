@@ -11,8 +11,17 @@ class AnswersController < ApplicationController
     @answer = @answer.decorate
 
     if @answer.save
-      flash[:success] = "Answer created!"
-      redirect_to question_path(@question)
+      respond_to do |format|
+        format.html do
+          flash[:success] = "Answer created!"
+          redirect_to question_path(@question)
+        end
+
+        format.turbo_stream do
+          @answer = @answer.decorate
+          flash.now[:success] = "Answer created!"
+        end
+      end
     else
       load_question_answers do_render: true
     end
@@ -23,8 +32,17 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update answer_update_params
-      flash[:success] = "Your answer updated!"
-      redirect_to question_path(@question, anchor: dom_id(@answer))
+      respond_to do |format|
+        format.html do
+          flash[:success] = "Your answer was updated!"
+          redirect_to question_path(@question, anchor: dom_id(@answer))
+        end
+
+        format.turbo_stream do
+          @answer = @answer.decorate
+          flash.now[:success] = "Your answer was updated!"
+        end
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,9 +51,14 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    flash[:success] = "Answer deleted!"
+    respond_to do |format|
+      format.html do
+        flash[:success] = "Answer was deleted!"
+        redirect_to question_path(@question)
+      end
 
-    redirect_to question_path(@question)
+      format.turbo_stream { flash.now[:success] = "Answer was deleted!" }
+    end
   end
 
 
