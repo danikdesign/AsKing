@@ -42,8 +42,17 @@ class QuestionsController < ApplicationController
   end
   def update
     if @question.update question_params
-      flash[:success] = "Your question has been updated"
-      redirect_to question_path(@question)
+      respond_to do |format|
+        format.html do
+          flash[:success] = "Your question has been updated"
+          redirect_to questions_path
+        end
+
+        format.turbo_stream do
+          @question = @question.decorate
+          flash.now[:success] = "Your question has been updated"
+        end
+      end
     else
       render :edit, status: :unprocessable_entity
     end
